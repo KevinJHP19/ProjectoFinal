@@ -82,19 +82,19 @@
                 <form>
                     <div class="mb-3">
                         <label for="imageTitle" class="form-label">Título de la Imagen</label>
-                        <input type="text" class="form-control" id="imageTitle" placeholder="Ingresa el título de la imagen">
+                        <input type="text" class="form-control" id="imageTitle" placeholder="Ingresa el título de la imagen" required>
                     </div>
                     <div class="mb-3">
                         <label for="imageDescription" class="form-label">Descripción</label>
-                        <textarea class="form-control" id="imageDescription" rows="3" placeholder="Ingresa una descripción"></textarea>
+                        <textarea class="form-control" id="imageDescription" rows="3" placeholder="Ingresa una descripción" required ></textarea>
                     </div>
                     <div class="mb-3">
                         <label for="imageFile" class="form-label">Seleccionar Imagen</label>
-                        <input type="file" class="form-control" id="imageFile" accept="image/*">
+                        <input type="file" class="form-control" id="imageFile" accept="image/*" required>
                     </div>
                     <div class="mb-3">
                         <label for="imageTags" class="form-label">Etiquetas</label>
-                        <input type="text" class="form-control" id="imageTags" placeholder="Ingresa etiquetas separadas por comas">
+                        <input type="text" class="form-control" id="imageTags" placeholder="Ingresa etiquetas separadas por comas" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Subir Imagen</button>
                 </form>
