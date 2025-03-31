@@ -2,7 +2,7 @@
         <div class="container-fluid bg-dark">
             <nav class="container navbar navbar-expand-lg navbar-dark ">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">ProjectoFinal</a>
+                    <a class="navbar-brand" href="index.php">ProjectoFinal</a>
 
                     <div class="search-input position-relative w-50">
                         <input type="search" class="form-control form-control-lg ps-5 bg-secondary" placeholder="Search images here">
@@ -11,8 +11,8 @@
                         </svg>
                      </div>
                      <div>
-                        <a href="register.html" class="btn btn-primary">Registrate</a>
-                        <a href="login.html" class="btn btn-secondary">Iniciar Sesion</a>
+                        <a href="register.php" class="btn btn-primary">Registrate</a>
+                        <a href="login.php" class="btn btn-secondary">Iniciar Sesion</a>
                      </div>
                     
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
