@@ -90,14 +90,10 @@ box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
             </div>
         
         <div class="col-7 p-5 d-flex justify-content-around flex-column" style="background-color:rgb(255, 255, 255); ">
-            <div class="header d-flex">
-                <div class="logo">
-                    <img src="./imagenes/logo.svg" alt="Logo" class="img-fluid">
-                    
-                </div>
-                
-                
-            </div>
+            <div class="logo d-flex  align-items-center">
+                        <img src="./imagenes/logo/logonegro.svg" alt="Logo" class="img-fluid">
+                        <h2>alerium</h2>
+                    </div>
             
         <h1 class="  mb-2 pt-4 pb-4 text-dark ">Iniciar sesión en tu cuenta</h1>
         <form action="validar_login.php" method="POST">

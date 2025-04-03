@@ -2,7 +2,7 @@
 
 include './config/config.php';
 
-if(isset($_POST['nombre'] $$ $_POST['apellidos'] && $_POST['usuario']))
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +60,10 @@ if(isset($_POST['nombre'] $$ $_POST['apellidos'] && $_POST['usuario']))
                     <!-- Espacio para contenido adicional si es necesario -->
                 </div>
                 <div class="col-7 p-5 d-flex justify-content-around flex-column" style="background-color:rgb(255, 255, 255);">
-                    
+                    <div class="logo d-flex justify-content-start align-items-center">
+                        <img src="./imagenes/logo/logonegro.svg" alt="Logo" class="img-fluid">
+                        <h2>alerium</h2>
+                    </div>
                     <h1 class="mb-2 pt-4 pb-4 text-dark">Crea tu cuenta</h1>
                     <form action="validar_register.php" method="POST">
                         <!-- Inputs específicos del formulario de registro -->

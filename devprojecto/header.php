@@ -2,7 +2,7 @@
         <div class="container-fluid bg-dark">
             <nav class="container navbar navbar-expand-lg navbar-dark ">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="index.php">ProjectoFinal</a>
+                    <a class="navbar-brand" href="index.php"><img src="./imagenes/logo/logo.svg" alt="" >alerium</a>
 
                     <div class="search-input position-relative w-50">
                         <input type="search" class="form-control form-control-lg ps-5 bg-secondary" placeholder="Search images here">
