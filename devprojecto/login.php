@@ -1,3 +1,31 @@
+<?php
+session_start();
+include './config/config.php';
+
+if (isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit();
+}
+if(isset($_POST['email']) && isset($_POST['password'])){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+    $stmt = $mysqli->prepare("SELECT * FROM usuarios WHERE email = ? AND password = ?");
+    $stmt->bind_param("ss", $email, $password);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+        $_SESSION['user_id'] = $user['id'];
+        header("Location: index.php");
+        exit();
+    } else {
+        echo "<script>alert('Correo o contraseña incorrectos');</script>";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,30 +63,62 @@ main {
     padding: 30px;
     
 }
+#login {
+    background-image: url(https://cdn.pixabay.com/photo/2014/07/02/08/30/images-381937_1280.jpg);
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+
+
+border: 3px solid #000;
+border-radius: 10px;
+
+box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
+
+
+}
 </style>
 </head>
-<body style="background-image: url(https://cdn.pixabay.com/photo/2014/07/02/08/30/images-381937_1280.jpg);
-">
-    <?php include './header.php'  ?>
-    <main >
-    <div class="container" id="login" >
-        <h1 class="text-center mt-5 mb-2 text-white p-2">Iniciar Sesión</h1>
-        <div class="card p-5 ">
+<body >
+    <?php include './header.php'?>
+    <main>
+    <div class="container" id="login">
+        <div class="row">
+            <div class="izquierda col-5">
+                
+            </div>
+        
+        <div class="col-7 p-5 d-flex justify-content-around flex-column" style="background-color:rgb(255, 255, 255); ">
+            <div class="header d-flex">
+                <div class="logo">
+                    <img src="./imagenes/logo.svg" alt="Logo" class="img-fluid">
+                    
+                </div>
+                
+                
+            </div>
+            
+        <h1 class="  mb-2 pt-4 pb-4 text-dark ">Iniciar sesión en tu cuenta</h1>
         <form action="validar_login.php" method="POST">
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="email" class="form-label">Correo electrónico:</label>
-                <input type="email" class="form-control" id="email" name="email" required>
+                <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu correo..." required>
             </div>
-            <div class="mb-3">
+            <div class="mb-4">
                 <label for="password" class="form-label">Contraseña:</label>
-                <input type="password" class="form-control" id="password" name="password" required>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Ingresa tu constaseña..." required>
             </div>
-            <div class="botones text-start">
+            <div class="botones text-start d-flex justify-content-between align-items-center">
             <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
             
-            <a href="olvido_password.php" class="btn btn-link">Olvidé mi contraseña</a>
+            <div class="d-flex">
+                <p class="text-center">¿No tienes una cuenta? <a href="register.php" class="btn btn-link">Registrate</a></p>
             </div>
+            </div>
+
         </form>
+    </div>
     </div>
     </div>
     </main>
