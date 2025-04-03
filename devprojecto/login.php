@@ -39,7 +39,7 @@ main {
 </head>
 <body style="background-image: url(https://cdn.pixabay.com/photo/2014/07/02/08/30/images-381937_1280.jpg);
 ">
-    <?php include './header.php' ?>
+    <?php include './header.php'  ?>
     <main >
     <div class="container" id="login" >
         <h1 class="text-center mt-5 mb-2 text-white p-2">Iniciar Sesión</h1>
