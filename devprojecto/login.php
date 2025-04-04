@@ -71,7 +71,7 @@ background-repeat: no-repeat;
 background-attachment: fixed;
 
 
-border: 3px solid #000;
+
 border-radius: 10px;
 
 box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
@@ -96,7 +96,7 @@ box-shadow: 0px 4px 8px 0px rgba(0,0,0,0.2);
                     </div>
             
         <h1 class="  mb-2 pt-4 pb-4 text-dark ">Iniciar sesión en tu cuenta</h1>
-        <form action="validar_login.php" method="POST">
+        <form action="" method="POST">
             <div class="mb-4">
                 <label for="email" class="form-label">Correo electrónico:</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Ingresa tu correo..." required>

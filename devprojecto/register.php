@@ -1,6 +1,56 @@
 <?php
 
-include './config/config.php';
+require_once './config/config.php';
+
+$uploadDir = 'uploads/avatars/';
+
+if(isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuario']) && isset($_POST['email']) && isset($_POST['password'])){
+    $nombre = $_POST['nombre'];
+    $apellido = $_POST['apellido'];
+    $usuario = $_POST['usuario'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $rol = 'usuario';
+    if ($_FILES['avatar']['error'] !== UPLOAD_ERR_OK) {
+        die('Error al subir el archivo: ' . $_FILES['avatar']['error']);
+    }
+    if(isset($_FILES['avatar']) && $_FILES['avatar']['error'] === UPLOAD_ERR_OK){
+        $fileTmpPath = $_FILES['avatar']['tmp_name'];
+        $fileName = $_FILES['avatar']['name'];
+
+        $fileNameCmps = explode(".", $fileName);
+        $fileExtension = strtolower(end($fileNameCmps));
+
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif'];
+        if(in_array($fileExtension, $allowedExtensions)){
+            $newFileName = md5(time() . $fileName). '.'. $fileExtension;
+            //Ruta final en carpeta uploads
+            $dest_path = $uploadDir . $newFileName;
+            //Mover el archivo de la caerpeta temporal a la carpeta uploads
+            if(!move_uploaded_file($fileTmpPath, $dest_path)){
+                die('Error al mover el archivo');
+            };
+        }else {
+            die('Formato de archivo no permitido');
+        }
+    }else{
+        die('Error al subir el archivo');
+    }
+    //2. cifrar la paswword con password_hash
+    $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+
+    // Insert the user into the database
+    $stmt = $mysqli->prepare("INSERT INTO USUARIOS (nombre, apellido, nick, correo, avatar, password, rol) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sssssss", $nombre, $apellido, $usuario, $email, $dest_path, $passwordHashed, $rol);
+    
+    if($stmt->execute()){
+        
+        header("Location: login.php");
+        exit();
+    } else {
+        echo "<script>alert('Error al registrar');</script>";
+    }
+}
 
 
 ?>
@@ -65,7 +115,7 @@ include './config/config.php';
                         <h2>alerium</h2>
                     </div>
                     <h1 class="mb-2 pt-4 pb-4 text-dark">Crea tu cuenta</h1>
-                    <form action="validar_register.php" method="POST">
+                    <form action="" method="POST" enctype="multipart/form-data">
                         <!-- Inputs específicos del formulario de registro -->
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre:</label>
