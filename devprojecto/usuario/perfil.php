@@ -72,7 +72,7 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi perfil</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/147cf78807.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -80,7 +80,7 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
     <div class="container-fluid bg-dark pt-2 pb-2">
         <nav class="container navbar navbar-expand-lg navbar-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.php">
+                <a class="navbar-brand" href="../index.php">
                     <img src="../imagenes/logo/logo.svg" alt=""> alerium
                 </a>
 
@@ -128,10 +128,10 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
                                     <li>Rol: <?php echo $user['rol'] ?><?php if ($user['rol'] === 'admin'): ?>
                                     <i class="fa-solid fa-shield-halved text-warning ms-2"></i> <!-- Ícono para admin -->
                                 <?php endif; ?> </li>
-                                    <li><a href="./usuario/mismegusta.php" class="mt-2 text-white nav-link">Mis me gusta</a></li>
-                                    <li><a href="./usuario/perfil.php" class=" mt-32 text-white nav-link">Perfil</a></li>
-                                    <li><a href="./subirimagen.php" class=" mt-2 text-white nav-link">Subir imagenes</a></li>
-                                    <li><a href="./logout.php" class="mt-3 btn btn-secondary ">Cerrar sesion</a></li>
+                                    <li><a href="./mismegusta.php" class="mt-2 text-white nav-link">Mis me gusta</a></li>
+                                    <li><a href="./perfil.php" class=" mt-32 text-white nav-link">Perfil</a></li>
+                                    <li><a href="../subirimagen.php" class=" mt-2 text-white nav-link">Subir imagenes</a></li>
+                                    <li><a href="../logout.php" class="mt-3 btn btn-secondary ">Cerrar sesion</a></li>
                                 </ul>
                             </div>
                         <?php endif; ?>
@@ -143,8 +143,9 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
 </header>
 <main>
     <div class="container">
-        <h1 class="text-center mt-5">Mi Perfil</h1>
-        <div class="bg-white border p-4 rounded-3">
+       
+        <div class="bg-white border p-4 rounded-3 mt-5">
+        <h1 class="text-center ">Mi Perfil</h1>
             <div class="d-flex justify-content-between  align-items-center">
                 <div class="d-flex align-items-center" > 
                 <img src="../<?php echo $user['avatar'] ?>" alt="" class="img-fluid rounded-circle me-3" width="120px" height="120px" data-bs-toggle="modal" data-bs-target="#verImagenModal">
@@ -155,7 +156,7 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
                 </div>
                 <div>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarPerfilModal">Editar perfil <i class="fa-solid fa-user-pen ms-2"></i></button>
-                    <a class="btn btn-success">Mis imagenes  <i class="fa-solid fa-images"></i></a>
+                    <a href="../subirimagen.php" class="btn btn-success">Mis imagenes  <i class="fa-solid fa-images"></i></a>
 
                     <?php if ($user['rol'] === 'admin'): ?>
                         <a class="btn btn-danger" href="../admin/paneldegestion.php">Panel de administración <i class="fa-solid fa-screwdriver-wrench ms-2"></i></a>

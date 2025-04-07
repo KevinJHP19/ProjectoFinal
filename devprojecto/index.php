@@ -1,6 +1,10 @@
 <?php
  session_start();
     require_once './config/config.php';
+    if(isset($_SESSION['user_id'])) {
+        $userQuery = $mysqli->query("SELECT * FROM USUARIOS where id = " . $_SESSION['user_id']);
+        $user = $userQuery->fetch_assoc();
+    }
     
 ?>
 
