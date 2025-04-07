@@ -1,29 +1,39 @@
 <?php
 session_start();
-include './config/config.php';
+require_once './config/config.php';
 
-if (isset($_SESSION['user_id'])) {
-    header("Location: index.php");
-    exit();
-}
 if(isset($_POST['email']) && isset($_POST['password'])){
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    $stmt = $mysqli->prepare("SELECT * FROM usuarios WHERE email = ? AND password = ?");
-    $stmt->bind_param("ss", $email, $password);
+    $stmt = $mysqli->prepare("SELECT * FROM USUARIOS WHERE correo = ? LIMIT 1");
+    
+    $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    if ($result->num_rows > 0) {
+    if ($result && $result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        $_SESSION['user_id'] = $user['id'];
-        header("Location: index.php");
-        exit();
+        // Verificar la contraseña
+        if (password_verify($password, $user['password'])) {
+            // Iniciar sesión
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['user_email'] = $user['correo'];
+            $_SESSION['user_name'] = $user['nombre'];
+            $_SESSION['user_subname'] = $user['apellido'];
+            $_SESSION['user_nickname'] = $user['nick'];
+            $_SESSION['user_avatar'] = $user['avatar'];
+            $_SESSION['user_rol'] = $user['rol'];
+            header('Location: index.php');
+            exit();
+        } else {
+            echo 'Credenciales incorrectas';
+        }
     } else {
-        echo "<script>alert('Correo o contraseña incorrectos');</script>";
+        echo 'Credenciales incorrectas';
     }
 }
+
 ?>
 
 <!DOCTYPE html>

@@ -1,3 +1,4 @@
+
 <header>
         <div class="container-fluid bg-dark">
             <nav class="container navbar navbar-expand-lg navbar-dark ">
@@ -11,8 +12,16 @@
                         </svg>
                      </div>
                      <div>
-                        <a href="register.php" class="btn btn-primary">Registrate</a>
-                        <a href="login.php" class="btn btn-secondary">Iniciar Sesion</a>
+                        <?php if (!isset($_SESSION['user_id'])): ?>
+                            <a href="register.php" class="btn btn-primary">Registrate</a>
+                            <a href="login.php" class="btn btn-secondary">Iniciar Sesion</a>
+                        <?php else: ?>
+                            <a href="usuario/perfil.php" class="btn btn-primary">Perfil</a>
+                            <a href="logout.php" class="btn btn-secondary">Cerrar Sesion</a>
+                            <?php if ($_SESSION['user_role'] == 'admin'): ?>
+                                <a href="admin/dashboard.php" class="btn btn-secondary">Admin Dashboard</a>
+                            <?php endif; ?>
+                        <?php endif; ?>
                      </div>
                     
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
