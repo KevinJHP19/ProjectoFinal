@@ -1,22 +1,23 @@
-.input-wrapper {
-    position: relative;
-    width: 271px;
-  }
-  
-  .search-icon {
-     left: 15px;
-  }
+
+header .form-control{
+    border-radius: 10px 0 0 10px !important;
+    background-color: rgb(226, 226, 226) !important;
+}
+header button{
+    border-radius: 0 10px 10px 0 !important;
+    margin-left: -10px !important;
+    
+    
+}
+header .p-2{
+    padding-top: .4rem !important;
+    padding-bottom: .4rem !important;
+}
+
   #banner .input{
       position: absolute;
       left: 50%;
-      
-      
-  
-      
-      
-  
-  
-  }
+}
           #banner{
               padding: 30px 0 30px 0;
               background-size: cover;
