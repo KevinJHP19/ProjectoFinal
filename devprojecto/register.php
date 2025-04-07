@@ -61,16 +61,8 @@ if(isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuario
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/147cf78807.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/147cf78807.js" crossorigin="anonymous"></script><link rel="stylesheet" href="style.css">
     <style>
-        .input-wrapper {
-            position: relative;
-            width: 271px;
-        }
-
-        .search-icon {
-            left: 15px;
-        }
 
         .card {
             max-width: 50%;
@@ -152,5 +144,6 @@ if(isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuario
             </div>
         </div>
     </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 </html>
