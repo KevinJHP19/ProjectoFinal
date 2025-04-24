@@ -9,7 +9,7 @@
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,10 +28,10 @@
                         <h1>Proyecto final</h1>
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. </p>
                         <div class="search-input position-relative">
-                            <input type="search" class="form-control form-control-lg ps-5" placeholder="Enter your query">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="position-absolute top-50 translate-middle-y search-icon text-secondary" width="25" height="25" viewBox="0 0 20 20" fill="currentColor">
-                               <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
-                            </svg>
+                                <div class="d-flex align-items-center justify-content-center w-50 mx-auto">
+                                <input type="search" class="form-control ps-2 bg-secondary mt-2 mb-2" placeholder="Buscar...">
+                                <button class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </div>
                          </div>
                     </div>
                 </div>

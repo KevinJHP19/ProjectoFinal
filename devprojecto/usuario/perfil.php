@@ -2,6 +2,7 @@
 session_start();
 require_once '../config/config.php';
 $uploadDir =__DIR__ . '../../uploads/avatars/';
+
 if (!isset($_SESSION['user_id'])) {
     header('Location: index.php');
     exit();
@@ -111,10 +112,10 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
                                     <?php endif; ?></a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="./usuario/mismegusta.php">Mis me gusta</a></li>
-                                    <li><a class="dropdown-item" href="./usuario/perfil.php">Perfil</a></li>
-                                    <li><a class="dropdown-item" href="./subirimagen.php">Subir imagenes</a></li>
+                                    <li><a class="dropdown-item" href="../usuario/perfil.php">Perfil</a></li>
+                                    <li><a class="dropdown-item" href="../subirimagen.php">Subir imagenes</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="./logout.php">Cerrar sesion</a></li>
+                                    <li><a class="dropdown-item" href="../logout.php">Cerrar sesion</a></li>
                                 </ul>
                             </div>
 
@@ -131,7 +132,7 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
                                     <li><a href="./mismegusta.php" class="mt-2 text-white nav-link">Mis me gusta</a></li>
                                     <li><a href="./perfil.php" class=" mt-32 text-white nav-link">Perfil</a></li>
                                     <li><a href="../subirimagen.php" class=" mt-2 text-white nav-link">Subir imagenes</a></li>
-                                    <li><a href="../logout.php" class="mt-3 btn btn-secondary ">Cerrar sesion</a></li>
+                                    <li><a href="../logout.php" class="mt-3 btn btn-primary ">Cerrar sesion</a></li>
                                 </ul>
                             </div>
                         <?php endif; ?>
@@ -156,7 +157,7 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
                 </div>
                 <div>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarPerfilModal">Editar perfil <i class="fa-solid fa-user-pen ms-2"></i></button>
-                    <a href="../subirimagen.php" class="btn btn-success">Mis imagenes  <i class="fa-solid fa-images"></i></a>
+                    <a href="./misimagenes.php" class="btn btn-success">Mis imagenes <i class="fa-solid fa-images"></i></a>
 
                     <?php if ($user['rol'] === 'admin'): ?>
                         <a class="btn btn-danger" href="../admin/paneldegestion.php">Panel de administración <i class="fa-solid fa-screwdriver-wrench ms-2"></i></a>
@@ -251,5 +252,6 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
     </div>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
 </body>
 </html>
