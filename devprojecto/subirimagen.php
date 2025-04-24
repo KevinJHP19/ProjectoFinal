@@ -5,6 +5,7 @@ if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit();
 }
+$uploadDir = 'uploads/imagenes'; // Directorio donde se guardarán las imágenes
 
 if (isset($_SESSION['user_id'])) {
     $userQuery = $mysqli->query("SELECT * FROM USUARIOS where id = " . $_SESSION['user_id']);
@@ -15,24 +16,63 @@ if (isset($_POST['imageTitle']) && isset($_POST['imageDescription']) && isset($_
     $title = $_POST['imageTitle'];
     $description = $_POST['imageDescription'];
     
-    $file = $_FILES['imageFile'];
+    
     $tags = $_POST['imageTags'];
     
     $arraytags = explode(',', $tags);
     $iconstags = $_POST['imagetagicon'];
     $arrayiconstags = explode(',', $iconstags);
+
+    if(isset($_FILES['imageFile']) && $_FILES['imageFile']['error'] === UPLOAD_ERR_OK) {
+         $fileTmpPath = $_FILES['imageFile']['tmp_name'];
+            $fileName = $_FILES['imageFile']['name'];
+
+            $fileNameCmps = explode(".", $fileName);
+            $fileExtension = strtolower(end($fileNameCmps));
+            $allowedfileExtensions = array('jpg', 'png', 'jpeg', 'webp');
+            if(in_array($fileExtension, $allowedfileExtensions)){
+                $newFileName = md5(time() . $fileName) . '.' . $fileExtension;
+
+                $dest_path = $uploadDir . '/' . $newFileName;
+
+                if(move_uploaded_file($fileTmpPath, $dest_path)){
+                    fie('Error al movel ')
+                } else {
+                    echo 'Error al mover el archivo subido.';
+                }
+            } else {
+                echo 'Tipo de archivo no permitido.';
+            }
+    }
     if (is_array($arraytags) && is_array($arrayiconstags)) {
         foreach ($arraytags as $index => $tag) {
             $tag = trim($tag);
             $iconstag = isset($arrayiconstags[$index]) ? trim($arrayiconstags[$index]) : null;
-            // Convierte el icono a Unicode en formato HEX
+            // Convierte el icono a Unicode 
             $iconstag = strtoupper(dechex(mb_ord($iconstag, 'UTF-8')));
             
             // Inserta la etiqueta y su icono en la tabla ETIQUETAS
             $query = "INSERT INTO ETIQUETAS (nombre, iconos) VALUES ('$tag', 'U+$iconstag')";
             $mysqli->query($query);
 
+            // Obtiene el ID de la etiqueta recién insertada
+            $tagId = $mysqli->insert_id;
+            // Inserta la imagen en la tabla IMAGENES
+            $query = "INSERT INTO IMAGENES (titulo, descripcion, id_usuario) VALUES ('$title', '$description', " . $_SESSION['user_id'] . ")";
+            $mysqli->query($query);
+            // Obtiene el ID de la imagen recién insertada
+            $imageId = $mysqli->insert_id;
+            // Inserta la relación entre la imagen y la etiqueta en la tabla IMAGENES_ETIQUETAS
+            $query = "INSERT INTO IMAGENES_ETIQUETAS (id_imagen, id_etiqueta) VALUES ('$imageId', '$tagId')";
+            $mysqli->query($query);
             
+
+
+            //inserta las etiqueta en la tabla etiquetas
+
+            
+
+
         }
     }
 }
