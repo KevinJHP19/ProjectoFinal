@@ -31,6 +31,8 @@ if (isset($_POST['imageTitle']) && isset($_POST['imageDescription']) && isset($_
             // Inserta la etiqueta y su icono en la tabla ETIQUETAS
             $query = "INSERT INTO ETIQUETAS (nombre, iconos) VALUES ('$tag', 'U+$iconstag')";
             $mysqli->query($query);
+
+            
         }
     }
 }
@@ -77,27 +79,21 @@ if (isset($_POST['imageTitle']) && isset($_POST['imageDescription']) && isset($_
                             <label for="imageDescription" class="form-label">Descripción</label>
                             <textarea class="form-control" id="imageDescription" name="imageDescription" rows="3" placeholder="Ingresa una descripción" required></textarea>
                         </div>
-                        <div class="d-flex gap-5 justify-content-center align-items-center">
+                        <div class="d-flex gap-5 justify-content-between align-items-center">
                         <div class="mb-3">
                             <label for="imageFile" class="form-label">Seleccionar Imagen</label>
                             <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*" required>
                         </div>
 
-                        <div id="miraimagen" class="imagen border" style="background-image: url('https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'); width: 500px; height: 400px;" data-bs-toggle="modal" data-bs-target="#imageModal">
+                        <div id="miraimagen" class="imagen border rounded-5" style="background-image: url('https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'); width: 500px; height: 400px;" data-bs-toggle="modal" data-bs-target="#imageModal">
                             
                         </div>
                         <!-- Modal -->
                         <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        
-                                    </div>
-                                    <div class="modal-body rounded-5 border p-5" style="background-image: url('https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'); background-size: cover; background-position: center; height: 400px;">
+                                <div class="modal-content" style="background-image: url('https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg'); background-size: cover; background-position: center; height: 500px; width: 500px;">
                                     
-                                        
-                                    </div>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                             </div>
                         </div>
@@ -122,18 +118,26 @@ if (isset($_POST['imageTitle']) && isset($_POST['imageDescription']) && isset($_
     <script>
         const imageFileInput = document.getElementById('imageFile');
         const miraimagen = document.getElementById('miraimagen');
+        const modalContent = document.querySelector('#imageModal .modal-content');
+
         imageFileInput.addEventListener('change', function() {
             const file = this.files[0];
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function(e) {
-                    miraimagen.style.backgroundImage = `url(${e.target.result})`;
+                    const imageUrl = e.target.result;
+                    miraimagen.style.backgroundImage = `url(${imageUrl})`;
                     miraimagen.style.backgroundSize = 'cover';
                     miraimagen.style.backgroundPosition = 'center';
+
+                    modalContent.style.backgroundImage = `url(${imageUrl})`;
+                    modalContent.style.backgroundSize = 'cover';
+                    modalContent.style.backgroundPosition = 'center';
                 }
                 reader.readAsDataURL(file);
             }
         });
+    </script>
     </script>
 </body>
 </html>
