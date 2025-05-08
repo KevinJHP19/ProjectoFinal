@@ -5,6 +5,9 @@
         $userQuery = $mysqli->query("SELECT * FROM USUARIOS where id = " . $_SESSION['user_id']);
         $user = $userQuery->fetch_assoc();
     }
+    $imagenes = $mysqli->query("SELECT * FROM IMAGENES");
+    $imagenes = $imagenes->fetch_all(MYSQLI_ASSOC);
+
     
 ?>
 
@@ -41,6 +44,21 @@
         <section id="images" class="py-5 bg-dark text-white" style="background-color: #232323;">
             <div class="container">
             <div class="row">
+                <?php foreach ($imagenes as $imagen): ?>
+                <div class="col-md-4 mb-4">
+                    <a href="./imagen.php?id=<?php echo $imagen['id']; ?>"><img src="<?php echo $imagen['url']; ?>" alt="<?php echo $imagen['nombre']; ?>" class="w-100"></a>
+                    <div class="info d-flex align-items-center justify-content-between p-3" style="background-color: #141414;">
+                        <div class="izquierda d-flex align-items-center">
+                            <a href="./usuario/perfil.php"><img src="<?php echo $user['avatar'] ?>" alt="" style="width: 50px; height: 50px;"></a>
+                            <h6><?php echo $user['nick'] ?></h6>
+                        </div>
+                        <div class="datos d-flex align-items-center">
+                            <a href="#"><i class="fa-regular fa-thumbs-up"></i></a>
+                            <span><?php echo $imagen['num_likes'] ?></span>
+                        </div>
+                    </div>
+                </div>
+                <?php endforeach; ?>
                 <div class="col-md-4 mb-4">
                 <a href="./imagen.php"><img src="./imagenes/image1.jpg" alt="Image 1" class="w-100"></a>
                 <div class="info d-flex align-items-center justify-content-between p-3" style="background-color: #141414;">

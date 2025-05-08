@@ -24,11 +24,11 @@
                         <!-- Dropdown para pantallas grandes -->
                         <div class="dropdown d-none d-lg-block">
                             <a class="bg-dark text-white dropdown-toggle d-flex align-items-center nav-link" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="<?php echo $user['avatar'] ?>" alt="" class="rounded-circle" width="50px" height="50px">
-                                <span class="ms-2 d-none d-lg-inline "><?php echo $user['nick'] ?></span>
+                                <img src="<?php echo $_SESSION['user_avatar'] ?>" alt="" class="rounded-circle" width="50px" height="50px">
+                                <span class="ms-2 d-none d-lg-inline "><?php echo $_SESSION['user_nickname'] ?></span>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end">
-                                <li><a class="dropdown-item" href="./admin/paneldegestion.php">Rol: <?php echo $user['rol'] ?> <?php if ($user['rol'] === 'admin'): ?>
+                                <li><a class="dropdown-item" href="./admin/paneldegestion.php">Rol: <?php echo $_SESSION['user_rol'] ?> <?php if ($_SESSION['user_rol'] === 'admin'): ?>
                                     <i class="fa-solid fa-gear m2 text-wring"></i> <!-- Ícono para admin -->
                             <?php endif; ?></a></li>
                                 <li><hr class="dropdown-divider"></li>
