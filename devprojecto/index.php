@@ -5,8 +5,10 @@
         $userQuery = $mysqli->query("SELECT * FROM USUARIOS where id = " . $_SESSION['user_id']);
         $user = $userQuery->fetch_assoc();
     }
-    $imagenes = $mysqli->query("SELECT * FROM IMAGENES");
-    $imagenes = $imagenes->fetch_all(MYSQLI_ASSOC);
+    $imagenes = $mysqli->query("SELECT IMAGENES.*, USUARIOS.id AS id_usuario, USUARIOS.nombre, USUARIOS.nick, USUARIOS.rol, USUARIOS.apellido, USUARIOS.avatar FROM IMAGENES LEFT JOIN USUARIOS ON IMAGENES.id_usuario = USUARIOS.id;");
+    $imagenes = $imagenes->fetch_all(MYSQLI_ASSOC)
+
+    
 
     
 ?>
@@ -46,19 +48,25 @@
             <div class="row">
                 <?php foreach ($imagenes as $imagen): ?>
                 <div class="col-md-4 mb-4">
-                    <a href="./imagen.php?id=<?php echo $imagen['id']; ?>"><img src="<?php echo $imagen['url']; ?>" alt="<?php echo $imagen['nombre']; ?>" class="w-100"></a>
+                    <a href="./imagen.php?id_imagen=<?php echo $imagen['id_imagen'] ?>"><img src="<?php echo $imagen['url'] ?>" alt="<?php echo $imagen['nombre'] ?>" class="w-100"></a>
                     <div class="info d-flex align-items-center justify-content-between p-3" style="background-color: #141414;">
                         <div class="izquierda d-flex align-items-center">
-                            <a href="./usuario/perfil.php"><img src="<?php echo $user['avatar'] ?>" alt="" style="width: 50px; height: 50px;"></a>
-                            <h6><?php echo $user['nick'] ?></h6>
+                            <a href="./usuario/perfil.php?id_usuario=<?php echo $imagen['id'] ?>"><img src="<?php echo $imagen['avatar'] ?>" alt="" style="width: 50px; height: 50px;"></a>
+                            <div class="d-flex flex-column ms-2">
+
+                            <h6><?php echo $imagen['nombre']. $imagen['apellido'] ?></h6>
+                            <em class="text-secondary"><?php echo "@" . $imagen['nick'] ?></em>
+                            </div>
                         </div>
                         <div class="datos d-flex align-items-center">
-                            <a href="#"><i class="fa-regular fa-thumbs-up"></i></a>
+                            <a href="./funciones/aumentarlikes.php?id_imagen=<?php echo $imagen['id'] ?>"><i class="fa-regular fa-thumbs-up"></i></a>
                             <span><?php echo $imagen['num_likes'] ?></span>
                         </div>
                     </div>
                 </div>
                 <?php endforeach; ?>
+
+                
                 <div class="col-md-4 mb-4">
                 <a href="./imagen.php"><img src="./imagenes/image1.jpg" alt="Image 1" class="w-100"></a>
                 <div class="info d-flex align-items-center justify-content-between p-3" style="background-color: #141414;">
