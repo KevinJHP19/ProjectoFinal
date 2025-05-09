@@ -125,9 +125,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php include 'header.php' ?>
     <main >
 
-        <div class="container mt-5 d-flex justify-content-center " >
+        <div class="container mt-5 d-flex justify-content-center pb-5" >
             <div class="col-md-10 border shadow p-5">
-                <h1 class="text-center position-relative pb-2 d-inline-flex justify-content-center align-items-center">
+                <h1 class="text-center ">
                     Subir Imagen
                     
                 </h1>
@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <input type="text" class="form-control" id="tags" name="tags" placeholder="Ingresa las etiquetas separadas por comas (ej: felicidad,caliente,fotografico)" required>
                         </div>
                         <div class="mb-3">
-                            <label for="icons" class="form-label">Iconos de etiquetas</label>
+                            <label for="icons" class="form-label">Iconos de etiquetas (Abrir panel de emojis: " <i class="fa-brands fa-windows" style="color: #000000;"></i> + . ")</label>
                             <input class="form-control" id="icons" name="icons" placeholder="Ingresa los iconos separados por comas (ej: 😃,🔥,📷)" required>
                         </div>
 
