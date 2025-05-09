@@ -31,7 +31,7 @@ $etiquetasimagen = $etiquetasimagen->fetch_all(MYSQLI_ASSOC);
 
 $verificarlike = $mysqli->query("SELECT LIKES.* FROM LIKES WHERE LIKES.imagen_id = $id AND LIKES.usuario_id = ".$_SESSION['user_id']." ");
 $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
-var_dump($verificarlike);
+
 
 
 
@@ -105,10 +105,12 @@ var_dump($verificarlike);
                             </div>
                         </div>
                         <div class="d-flex fs-5 align-items-center">
-                            <?php if(isset($verificarlike)): ?>
-                                <a href="./funciones/aumentarlikes.php?id_imagen=<?php echo $vistaimagen[0]['id']?>&page=true"><i class="fa-solid fa-thumbs-up"></i></a>
+                            <?php if(!empty($verificarlike)): ?>
+                                <a href="./funciones/disminuirlikes.php?id_imagen=<?php echo $vistaimagen[0]['id']?>&page=true"><i class="fa-solid fa-thumbs-up"></i></a>
+                                
                             <?php else: ?>
-                                <a href="./funciones/disminuirlikes.php?id_imagen=<?php echo $vistaimagen[0]['id']?>&page=true"><i class="fa-solid fa-thumbs-down"></i></a>
+                                <a href="./funciones/aumentarlikes.php?id_imagen=<?php echo $vistaimagen[0]['id']?>&page=true"><i class="fa-regular fa-thumbs-up"></i></a>
+                                
                             <?php endif; ?>
                             
                             <span class="ms-2"><?php echo $vistaimagen[0]['num_likes'] ?></span>

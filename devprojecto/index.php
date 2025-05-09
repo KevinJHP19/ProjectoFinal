@@ -6,11 +6,8 @@
         $user = $userQuery->fetch_assoc();
     }
     $imagenes = $mysqli->query("SELECT IMAGENES.*, USUARIOS.id AS id_usuario, USUARIOS.nombre, USUARIOS.nick, USUARIOS.rol, USUARIOS.apellido, USUARIOS.avatar FROM IMAGENES LEFT JOIN USUARIOS ON IMAGENES.id_usuario = USUARIOS.id;");
-    $imagenes = $imagenes->fetch_all(MYSQLI_ASSOC)
+    $imagenes = $imagenes->fetch_all(MYSQLI_ASSOC);
 
-    
-
-    
 ?>
 
 <!DOCTYPE html>
@@ -59,7 +56,18 @@
                             </div>
                         </div>
                         <div class="datos d-flex align-items-center">
-                            <a href="./funciones/aumentarlikes.php?id_imagen=<?php echo $imagen['id'] ?>"><i class="fa-regular fa-thumbs-up"></i></a>
+                            <?php
+                            //Esto es para verificar si el usuario ya le dio like a la imagen
+                            $verificarlike = $mysqli->query("SELECT * FROM LIKES WHERE imagen_id = " . $imagen['id'] . " AND usuario_id = " . $_SESSION['user_id']);
+                            $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
+                            ?>
+                            <?php if(!empty($verificarlike)): ?>
+                                <a href="./funciones/disminuirlikes.php?id_imagen=<?php echo $imagen['id']?>"><i class="fa-solid fa-thumbs-up"></i></a>
+                                
+                            <?php else: ?>
+                                <a href="./funciones/aumentarlikes.php?id_imagen=<?php echo $imagen['id']?>"><i class="fa-regular fa-thumbs-up"></i></a>
+                                
+                            <?php endif; ?>
                             <span><?php echo $imagen['num_likes'] ?></span>
                         </div>
                     </div>
