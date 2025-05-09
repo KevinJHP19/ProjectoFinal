@@ -1,5 +1,52 @@
+<?php
+session_start();
+
+require_once './config/config.php';
+
+
+
+
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: /login.php');
+    exit();
+}
+
+if (isset($_GET['id_imagen'])) {
+    $id = $_GET['id_imagen'];
+} 
+
+$vistaimagen = $mysqli->query("
+    SELECT IMAGENES.*, USUARIOS.id AS id_usuario, USUARIOS.nombre, USUARIOS.nick, USUARIOS.rol, USUARIOS.apellido, USUARIOS.avatar 
+    FROM IMAGENES 
+    LEFT JOIN USUARIOS ON IMAGENES.id_usuario = USUARIOS.id 
+    WHERE IMAGENES.id = $id
+");
+$vistaimagen = $vistaimagen->fetch_all(MYSQLI_ASSOC);
+
+$etiquetasimagen = $mysqli->query("
+    SELECT E.* FROM ETIQUETA E INNER JOIN IMAGEN_ETIQUETA EI ON E.id = EI.etiqueta_id WHERE EI.imagen_id = $id
+");
+$etiquetasimagen = $etiquetasimagen->fetch_all(MYSQLI_ASSOC);
+
+$verificarlike = $mysqli->query("SELECT LIKES.* FROM LIKES WHERE LIKES.imagen_id = $id AND LIKES.usuario_id = ".$_SESSION['user_id']." ");
+$verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
+var_dump($verificarlike);
+
+
+
+
+
+
+
+
+
+
+
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,44 +89,53 @@
     <?php include './header.php' ?>
     <main>
         <section id="miraimagen" style="background-color: #232323;" class="pt-3">
-            <div class="imagen container  rounded-3 mt-3" style="background-image: url(/imagenes/image5.jpg);">
+            <div class="imagen container  rounded-3 mt-3" style="background-image: url(<?php echo $vistaimagen[0]['url'] ?>);">
                 <div class="descargar text-align-end">
-                    <a href="#" class="btn btn-success m-1 me-4"><i class="fas fa-download"></i> Download image</a>
+                    <a href="<?php echo $vistaimagen[0]['url'] ?>" download="img" class="btn btn-success m-1 me-4"><i class="fas fa-download" ></i> Descargar imagen</a>
                 </div>
             </div>
             <div class="container">
                 
                     <div class="d-flex text-white align-items-center justify-content-between mt-4 mb-4">
                         <div class="d-flex align-items-center">
-                            <img src="./imagenes/avatar.png" alt="" width="120px" height="120px">
+                            <img src="<?php echo $vistaimagen[0]['avatar']?>" alt="" width="120px" height="120px" class="rounded-circle me-3">
                             <div class="">
-                            <h6>Nombre Apellidos</h6>
-                            <h6><em>@username</em></h6>
+                            <h6><?php echo $vistaimagen[0]['nombre'] ." ". $vistaimagen[0]['apellido'] ?></h6>
+                            <h6><em>@<?php echo $vistaimagen[0]['nick'] ?></em></h6>
                             </div>
                         </div>
                         <div class="d-flex fs-5 align-items-center">
-                            <i class="fa-regular fa-thumbs-up "></i>
-                            <span class="ms-2">2.3K</span>
+                            <?php if(isset($verificarlike)): ?>
+                                <a href="./funciones/aumentarlikes.php?id_imagen=<?php echo $vistaimagen[0]['id']?>&page=true"><i class="fa-solid fa-thumbs-up"></i></a>
+                            <?php else: ?>
+                                <a href="./funciones/disminuirlikes.php?id_imagen=<?php echo $vistaimagen[0]['id']?>&page=true"><i class="fa-solid fa-thumbs-down"></i></a>
+                            <?php endif; ?>
+                            
+                            <span class="ms-2"><?php echo $vistaimagen[0]['num_likes'] ?></span>
                         </div>
                     </div>
                     <div>
                         <h7 class="text-white p-2 fs-4">Releated Tags</h7>
                         <div class="etiquetas d-flex pb-5">
-                            <div>
-                            <a href="#" class="btn btn-secondary btn-sm m-1 ">Animals in the wild</a>
-                            <a href="#" class="btn btn-secondary btn-sm m-1 ">Animals images & Pictures</a>
-                            <a href="#" class="btn btn-secondary btn-sm m-1 ">Elephant Images</a>
-                            <a href="#" class="btn btn-secondary btn-sm m-1 ">Nature Images</a>
-                            <a href="#" class="btn btn-secondary btn-sm m-1 ">Animals walking</a>
-                            <a href="#" class="btn btn-secondary btn-sm m-1 ">Natural habitat</a>
-                            <a href="#" class="btn btn-secondary btn-sm m-1 ">Wild</a>
-                            <a href="#" class="btn btn-secondary btn-sm m-1 ">Animal pictures</a>
-                            <a href="#" class="btn btn-secondary btn-sm m-1 ">Animals</a>
-                            <a href="#" class="btn btn-secondary btn-sm m-1 ">Giant animals</a>
-                            <a href="#" class="btn btn-secondary btn-sm m-1 ">Fors animals</a>
+                            <div class="d-flex align-items-center">
+                                
+                            <?php foreach ($etiquetasimagen as $etiqueta): ?>
+                                <?php 
+                                    // Convertir el código Unicode a un carácter legible
+                                    $icono = '';
+                                    if (!empty($etiqueta['icono'])) {
+                                        $unicode = str_replace('U+', '', $etiqueta['icono']); // Eliminar el prefijo "U+"
+                                        $icono = mb_convert_encoding('&#x' . $unicode . ';', 'UTF-8', 'HTML-ENTITIES');
+                                    }
+                                ?>
+                                <a href="#" class="text-decoration-none text-center rounded-3">
+                                    <?php echo $icono . " " . $etiqueta['nombre']; ?>
+                                </a>
+                            <?php endforeach; ?>
 
                         </div>
                     </div>
+    </div>
                 
                 
             </div>

@@ -47,15 +47,15 @@
             <div class="container">
             <div class="row">
                 <?php foreach ($imagenes as $imagen): ?>
-                <div class="col-md-4 mb-4">
-                    <a href="./imagen.php?id_imagen=<?php echo $imagen['id_imagen'] ?>"><img src="<?php echo $imagen['url'] ?>" alt="<?php echo $imagen['nombre'] ?>" class="w-100"></a>
+                <div class=" mb-4 col-lg-4 overflow-hidden" height="400px">
+                    <a href="./imagen.php?id_imagen=<?php echo $imagen['id'] ?>">
+                        <img src="<?php echo $imagen['url'] ?>" alt="<?php echo $imagen['nombre'] ?>" class="w-100" ></a>
                     <div class="info d-flex align-items-center justify-content-between p-3" style="background-color: #141414;">
                         <div class="izquierda d-flex align-items-center">
                             <a href="./usuario/perfil.php?id_usuario=<?php echo $imagen['id'] ?>"><img src="<?php echo $imagen['avatar'] ?>" alt="" style="width: 50px; height: 50px;"></a>
                             <div class="d-flex flex-column ms-2">
-
-                            <h6><?php echo $imagen['nombre']. $imagen['apellido'] ?></h6>
-                            <em class="text-secondary"><?php echo "@" . $imagen['nick'] ?></em>
+                                <h6><?php echo $imagen['nombre'] . $imagen['apellido'] ?></h6>
+                                <em class="text-secondary"><?php echo "@" . $imagen['nick'] ?></em>
                             </div>
                         </div>
                         <div class="datos d-flex align-items-center">

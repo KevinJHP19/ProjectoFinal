@@ -7,19 +7,39 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 //Obtenemos el id de la imagen
-$imageId = $_GET['imageId'];
+if(isset($_GET['id_imagen'])) {
+    $imageId = $_GET['id_imagen'];
+} else {
+    // Manejar el caso en que no se proporciona un ID de imagen
+    echo "ID de imagen no proporcionado.";
+    exit();
+}
 
 //Ahora le disminuimos un like a la imagen
 
-$stmt = $mysqli->prepare("UPDATE IMAGENES SET likes = likes - 1 WHERE id_imagen = ?");
+$stmt = $mysqli->prepare("UPDATE IMAGENES SET num_likes = GREATEST(num_likes - 1, 0) WHERE id = ?");
 $stmt->bind_param("i", $imageId);
-$stmt->execute();
-if ($stmt->affected_rows > 0) {
-    // Si se actualizó correctamente, redirigir a la página de la imagen
-    header("Location: ../index.php");
+
+$stmt1 = $mysqli->prepare("DELETE FROM LIKES WHERE imagen_id = ? AND usuario_id = ?");
+$stmt1->bind_param("ii", $imageId, $_SESSION['user_id']);
+
+if (!$stmt->execute()) {
+    echo "Error al disminuir el like: " . $stmt->error;
+    exit();
+}
+
+if (!$stmt1->execute()) {
+    echo "Error al eliminar el registro de like: " . $stmt1->error;
+    exit();
+}
+
+if (isset($_GET['page'])) {
+    header("Location: ../imagen.php?id_imagen=$imageId");
+    exit();
+    
 } else {
-    // Si no se actualizó, redirigir a una página de error o mostrar un mensaje
-    echo "Error al aumentar el like.";
+    header("Location: ../index.php");
+    exit();
 }
 $stmt->close();
 $mysqli->close();
