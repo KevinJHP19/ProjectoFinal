@@ -14,10 +14,7 @@ header .p-2{
     padding-bottom: .4rem !important;
 }
 
-  #banner .input{
-      position: absolute;
-      left: 50%;
-}
+  
           #banner{
               padding: 30px 0 30px 0;
               background-size: cover;
@@ -76,18 +73,5 @@ header .p-2{
               list-style: none !important;
               
           }
-          #paginacion li a{
-              color: #fff;
-              text-decoration: none;
-  
-          }
-          #paginacion li{
-              padding: 10px;
-              border-radius: 5px;
-              
-          }
-          #paginacion li:hover{
-              background-color: #007bff;
-              color: #fff;
-          }
+          
   
