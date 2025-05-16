@@ -46,9 +46,12 @@ $total_pages = ceil($total_imagenes / $limit);
                         <h1>Proyecto final</h1>
                         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. </p>
                             <div class="d-flex align-items-center justify-content-center w-50 mx-auto">
-                        <input type="search" class="form-control ps-2 bg-secondary mt-2 mb-2" placeholder="Buscar...">
-                        <button class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
+                                <form action="buscado.php" method="GET" class="d-flex">
+                                    <input type="search" class="form-control ps-2 bg-secondary mt-2 mb-2" placeholder="Buscar...">
+                                    <button class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </form>
+                        
+                            </div>
                     </div>
                 </div>
             </div>

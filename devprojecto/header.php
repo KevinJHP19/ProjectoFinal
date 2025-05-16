@@ -12,8 +12,10 @@
 
                 <div class="collapse navbar-collapse w-100" id="navbarNav">
                     <div class="d-flex align-items-center justify-content-center w-50 mx-auto">
-                        <input type="search" class="form-control ps-2 bg-secondary mt-2 mb-2" placeholder="Buscar...">
-                        <button class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <form class="d-flex w-100" method="get" action="buscado.php">
+                            <input type="search" name="query" class="form-control ps-2 bg-secondary mt-2 mb-2" placeholder="Buscar...">
+                            <button type="submit" class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
                     </div>
 
                     <div class="ms-auto">

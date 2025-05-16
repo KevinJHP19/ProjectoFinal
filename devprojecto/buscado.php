@@ -1,3 +1,38 @@
+<?php 
+    session_start();
+    
+    require_once "./config/config.php";
+    
+    if(isset($_GET['query'])){
+        $itembusqueda = $_GET['query'];
+    }else{
+        header('Location: index.php');
+    }
+    //verificamos si existe un usuario 
+    if(isset($_SESSION['user_id'])) {
+        $userQuery = $mysqli->query("SELECT * FROM USUARIOS where id = " . $_SESSION['user_id']);
+        $user = $userQuery->fetch_assoc();
+    }
+    // Obtener el total de imágenes
+    $total_result = $mysqli->query("SELECT COUNT(DISTINCT IMAGENES.id) as total
+        FROM IMAGENES
+        LEFT JOIN IMAGEN_ETIQUETA ON IMAGENES.id = IMAGEN_ETIQUETA.imagen_id
+        LEFT JOIN ETIQUETA ON IMAGEN_ETIQUETA.etiqueta_id = ETIQUETA.id
+        WHERE IMAGENES.titulo LIKE '%$itembusqued%' OR ETIQUETA.nombre LIKE '%$itembusqueda%'");
+    $total_imagenes = $total_result->fetch_assoc()['total'];
+    $total_pages = ceil($total_imagenes / $limit);
+
+    printf($total_imagenes);
+
+    $limit = 9; //imagenes por pagina
+    $page = isset($_GET['page']) ? $_GET['page'] : 1; //pagina actual
+    $page =  max($page,1);
+    $offset = ($page - 1) * $limit;
+
+   
+
+    ?>
+
 <!DOCTYPE html>
 <html lang="eS">
 <head>
@@ -8,100 +43,13 @@
   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/147cf78807.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+ 
+
+    
     
 
-    <style>
-        .input-wrapper {
-  position: relative;
-  width: 271px;
-}
-
-.search-icon {
-   left: 15px;
-}
-#banner .input{
-    position: absolute;
-    left: 50%;
-}
-        #banner{
-            padding: 30px 0 30px 0;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        /* Estilos adicionales para la galería de imágenes */
-        #images .col-md-4 {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #images img {
-            width: 100%;
-            height: 300px; /* Ajusta la altura según tus necesidades */
-            object-fit: cover;
-        }
-
-        #images .info {
-            width: 100%;
-            background-color: #141414;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        #images .info .izquierda {
-            display: flex;
-            align-items: center;
-        }
-
-        #images .info .izquierda img {
-            width: 0px;
-            
-            margin-right: 10px;
-        }
-
-        #images .info .datos {
-            display: flex;
-            align-items: center;
-        }
-
-        #images .info .datos i {
-            margin-right: 5px;
-        }
-     
-        #paginacion ul{
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-direction: row;
-            list-style: none !important;
-            
-        }
-        #paginacion li a{
-            color: #fff;
-            text-decoration: none;
-
-        }
-        #paginacion li{
-            padding: 10px;
-            border-radius: 5px;
-            
-        }
-        #paginacion li:hover{
-            background-color: #007bff;
-            color: #fff;
-        }
-        .btn-secondary{
-            background-color: #232323 !important;
-            color: #fff !important;
-            padding:10px 35px 10px 35px !important;    
-        }
-        
-    </style>
+    
 </head>
 <body>
     <?php include './header.php' ?>
@@ -120,6 +68,26 @@
                     <a href="#" class="btn btn-secondary btn-sm m-1">Amphibians</a>
                     <a href="#" class="btn btn-secondary btn-sm m-1">Mammals</a>
                     <a href="#" class="btn btn-secondary btn-sm m-1">Insects</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    
                     
                     
                 </div>
