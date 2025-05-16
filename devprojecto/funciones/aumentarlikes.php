@@ -25,15 +25,17 @@ $stmt1->bind_param("ii", $imageId, $_SESSION['user_id']);
 $stmt1->execute();
 
 $stmt->execute();
-if (isset($_GET['page'])) {
+if ($_GET['page'] == true) {
     header("Location: ../imagen.php?id_imagen=$imageId");
     exit();
     
+} else if ($_GET['buscado'] == true) {
+    header("Location: ../buscado.php?query=".$_GET['query']);
+    exit();
+
 } else {
     header("Location: ../index.php");
     exit();
-    
-    
 }
 
 $stmt->close();

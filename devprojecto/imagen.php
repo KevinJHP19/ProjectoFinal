@@ -32,18 +32,6 @@ $etiquetasimagen = $etiquetasimagen->fetch_all(MYSQLI_ASSOC);
 $verificarlike = $mysqli->query("SELECT LIKES.* FROM LIKES WHERE LIKES.imagen_id = $id AND LIKES.usuario_id = ".$_SESSION['user_id']." ");
 $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
 
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -104,17 +92,27 @@ $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
                             <h6><em>@<?php echo $vistaimagen[0]['nick'] ?></em></h6>
                             </div>
                         </div>
+                        <div class="d-flex justify-content-end align-items-center gap-4">
                         <div class="d-flex fs-5 align-items-center">
-                            <?php if(!empty($verificarlike)): ?>
-                                <a href="./funciones/disminuirlikes.php?id_imagen=<?php echo $vistaimagen[0]['id']?>&page=true"><i class="fa-solid fa-thumbs-up"></i></a>
-                                
-                            <?php else: ?>
-                                <a href="./funciones/aumentarlikes.php?id_imagen=<?php echo $vistaimagen[0]['id']?>&page=true"><i class="fa-regular fa-thumbs-up"></i></a>
-                                
-                            <?php endif; ?>
+                            <i class="fa-solid fa-download"></i>
+                            <span class="ms-2"><?php echo $vistaimagen[0]['num_descargas'] ?></span>
                             
-                            <span class="ms-2"><?php echo $vistaimagen[0]['num_likes'] ?></span>
                         </div>
+                        
+
+                        
+                            <div class="d-flex fs-5 align-items-center">
+                                <?php if(!empty($verificarlike)): ?>
+                                    <a href="./funciones/disminuirlikes.php?id_imagen=<?php echo $vistaimagen[0]['id']?>&page=true"><i class="fa-solid fa-thumbs-up"></i></a>
+                                    
+                                <?php else: ?>
+                                    <a href="./funciones/aumentarlikes.php?id_imagen=<?php echo $vistaimagen[0]['id']?>&page=true"><i class="fa-regular fa-thumbs-up"></i></a>
+                                    
+                                <?php endif; ?>
+                                
+                                <span class="ms-2"><?php echo $vistaimagen[0]['num_likes'] ?></span>
+                            </div>
+                         </div>
                     </div>
                     <div>
                         <h7 class="text-white p-2 fs-4">Releated Tags</h7>

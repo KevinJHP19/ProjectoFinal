@@ -33,10 +33,14 @@ if (!$stmt1->execute()) {
     exit();
 }
 
-if (isset($_GET['page'])) {
+if ($_GET['page'] == true) {
     header("Location: ../imagen.php?id_imagen=$imageId");
     exit();
     
+} else if ($_GET['buscado'] == true) {
+    header("Location: ../buscado.php?query=".$_GET['query']);
+    exit();
+
 } else {
     header("Location: ../index.php");
     exit();

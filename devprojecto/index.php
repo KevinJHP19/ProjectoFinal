@@ -43,12 +43,18 @@ $total_pages = ceil($total_imagenes / $limit);
             <div class="container pt-5 pb-5">
                 <div class="row">
                     <div class="col-12 text-center text-white">
-                        <h1>Proyecto final</h1>
-                        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. </p>
+                        <div class="d-flex align-items-center justify-content-center">
+                            <a class="navbar-brand" href="index.php">
+                            <img src="./imagenes/logo/logo.svg" alt="logo" width="70px" height="70px"> 
+                            </a>
+                            <h1>alerium</h1>
+                        </div>
+                        
+                        <p>Una plataforma inteligente para la gestión, exploración y publicación de contenido visual</p>
                             <div class="d-flex align-items-center justify-content-center w-50 mx-auto">
-                                <form action="buscado.php" method="GET" class="d-flex">
-                                    <input type="search" class="form-control ps-2 bg-secondary mt-2 mb-2" placeholder="Buscar...">
-                                    <button class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                <form class="d-flex w-100" method="get" action="buscado.php">
+                                    <input type="search" name="query" class="form-control ps-2 bg-secondary mt-2 mb-2" placeholder="Buscar...">
+                                    <button type="submit" class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
                                 </form>
                         
                             </div>
