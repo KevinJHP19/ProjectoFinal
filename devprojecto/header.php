@@ -34,7 +34,7 @@
                                     <i class="fa-solid fa-gear m2 text-wring"></i> <!-- Ícono para admin -->
                             <?php endif; ?></a></li>
                                 <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="./usuario/mismegusta.php">Mis me gusta</a></li>
+                                <li><a class="dropdown-item" href="./usuario/mismegusta.php?user_id=<?php echo $_SESSION['user_id']?>">Mis me gusta</a></li>
                                 <li><a class="dropdown-item" href="./usuario/perfil.php">Perfil</a></li>
                                 <li><a class="dropdown-item" href="./subirimagen.php">Subir imagenes</a></li>
                                 <li><hr class="dropdown-divider"></li>
