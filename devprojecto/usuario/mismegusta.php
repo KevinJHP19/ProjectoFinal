@@ -138,7 +138,7 @@ $user = $userQuery->fetch_assoc();
                                         <img src="../<?php echo htmlspecialchars($imagen['avatar']) ?>" alt="Avatar" class="rounded-circle me-2" width="32" height="32">
                                         <span class="fw-bold"><?php echo htmlspecialchars($imagen['nick']) ?></span>
                                     </div>
-                                    <a href="../funciones/disminuirlikes.php?id_imagen=<?php echo $imagen['id']&; ?>" class="btn btn-outline-danger w-100 mt-3">
+                                    <a href="../funciones/disminuirlikes.php?id_imagen=<?php echo $imagen['id']; ?>" class="btn btn-outline-danger w-100 mt-3">
                                         <i class="fas fa-heart-broken"></i> Quitar Like
                                     </a>
                                 </div>
