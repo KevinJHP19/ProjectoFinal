@@ -123,58 +123,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
     <?php include 'header.php' ?>
-    <main >
-
-        <div class="container mt-5 d-flex justify-content-center pb-5" >
+    <main>
+        <div class="container mt-5 d-flex justify-content-center pb-5">
             <div class="col-md-10 border shadow p-5">
-                <h1 class="text-center ">
-                    Subir Imagen
-                    
+                <h1 class="text-center mb-4 fw-bold">
+                    <i class="fa-solid fa-cloud-arrow-up me-2"></i>
+                    Sube tu Imagen Favorita
                 </h1>
-
-                    <form method="POST" enctype="multipart/form-data" action="subirimagen.php">
-                        <div class="mb-3">
-                            <label for="imageTitle" class="form-label">Título de la Imagen</label>
-                            <input type="text" class="form-control" id="imageTitle" name="imageTitle" placeholder="Ingresa el título de la imagen" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="imageDescription" class="form-label">Descripción</label>
-                            <textarea class="form-control" id="imageDescription" name="imageDescription" rows="3" placeholder="Ingresa una descripción" required></textarea>
-                        </div>
-                        <div class="d-flex gap-5 justify-content-between align-items-center">
-                        <div class="mb-3">
-                            <label for="imageFile" class="form-label">Seleccionar Imagen</label>
+                <p class="text-center text-muted mb-4">
+                    Completa el formulario para compartir tu imagen con la comunidad.
+                </p>
+                <?php if ($_SERVER['REQUEST_METHOD'] === 'POST'): ?>
+                    <div class="alert alert-success text-center" role="alert">
+                        Imagen subida correctamente.
+                    </div>
+                <?php endif; ?>
+                <form method="POST" enctype="multipart/form-data" action="subirimagen.php" autocomplete="off">
+                    <div class="mb-3">
+                        <label for="imageTitle" class="form-label fw-semibold">
+                            Título de la imagen <span class="text-muted">(máx. 100 caracteres)</span>
+                        </label>
+                        <input type="text" class="form-control" id="imageTitle" name="imageTitle" placeholder="Ejemplo: Atardecer en la playa" maxlength="100" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="imageDescription" class="form-label fw-semibold">
+                            Descripción <span class="text-muted">(máx. 500 caracteres)</span>
+                        </label>
+                        <textarea class="form-control" id="imageDescription" name="imageDescription" rows="3" placeholder="Describe brevemente la imagen" maxlength="500" required></textarea>
+                    </div>
+                    <div class="d-flex gap-5 justify-content-between align-items-center flex-wrap mb-3">
+                        <div class="mb-3 flex-grow-1">
+                            <label for="imageFile" class="form-label fw-semibold">
+                                Selecciona una imagen <span class="text-muted">(formatos permitidos: JPG, JPEG, PNG, GIF)</span>
+                            </label>
                             <input type="file" class="form-control" id="imageFile" name="imageFile" accept="image/*" required>
                         </div>
-
-                        <div id="miraimagen" class="imagen border rounded-5" style="background-image: url('https://cdn.pixabay.com/photo/2017/01/25/17/35/picture-2008484_1280.png'); width: 600px; height: 400px  ;" data-bs-toggle="modal" data-bs-target="#imageModal">
-                            
-                        </div>
+                        <div id="miraimagen" class="imagen border rounded-5 flex-grow-1" style="background-image: url('https://cdn.pixabay.com/photo/2017/01/25/17/35/picture-2008484_1280.png'); width: 600px; height: 400px;" data-bs-toggle="modal" data-bs-target="#imageModal"></div>
                         <!-- Modal -->
-                        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true" >
-                            <div class="modal-dialog modal-dialog-centered" style="width: 900px; height: 800px;">
-                                <div class="modal-content" style="background-image: url('https://cdn.pixabay.com/photo/2017/01/25/17/35/picture-2008484_1280.png'); background-size: cover; background-position: center; background-repeat: no-repeat;  width: 900px; height: 400px;">
-                                    
+                        <div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" style="max-width: 900px;">
+                                <div class="modal-content" style="background-image: url('https://cdn.pixabay.com/photo/2017/01/25/17/35/picture-2008484_1280.png'); background-size: cover; background-position: center; background-repeat: no-repeat; width: 900px; height: 400px;">
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                             </div>
                         </div>
-
-                        </div>
-                        
-                        <div class="mb-3">
-                            <label for="tags" class="form-label">Etiquetas</label>
-                            <input type="text" class="form-control" id="tags" name="tags" placeholder="Ingresa las etiquetas separadas por comas (ej: felicidad,caliente,fotografico)" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="icons" class="form-label">Iconos de etiquetas (Abrir panel de emojis: " <i class="fa-brands fa-windows" style="color: #000000;"></i> + . ")</label>
-                            <input class="form-control" id="icons" name="icons" placeholder="Ingresa los iconos separados por comas (ej: 😃,🔥,📷)" required>
-                        </div>
-
-                        
-                        <button type="submit" class="btn btn-primary">Subir Imagen</button>
-                    </form>
-                
+                    </div>
+                    <div class="mb-3">
+                        <label for="tags" class="form-label fw-semibold">
+                            Etiquetas <span class="text-muted">(separadas por comas, ej: naturaleza,verano,playa)</span>
+                        </label>
+                        <input type="text" class="form-control" id="tags" name="tags" placeholder="Ejemplo: naturaleza,verano,playa" maxlength="200" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="icons" class="form-label fw-semibold">
+                            Iconos de etiquetas <span class="text-muted">(un emoji por etiqueta, separados por comas. Abrir panel de emojis: <i class="fa-brands fa-windows" style="color: #000000;"></i> + . )</span>
+                        </label>
+                        <input class="form-control" id="icons" name="icons" placeholder="Ejemplo: 🌳,☀️,🏖️" maxlength="100" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Subir Imagen</button>
+                </form>
             </div>
         </div>
     </main>

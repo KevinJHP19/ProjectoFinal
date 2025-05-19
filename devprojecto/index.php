@@ -78,7 +78,7 @@ $total_pages = ceil($total_imagenes / $limit);
                                 <em class="text-secondary"><?php echo "@" . $imagen['nick'] ?></em>
                             </div>
                         </div>
-                        <div class="datos d-flex align-items-center">
+                        <div class="datos d-flex align-items-center ">
                             <?php
                             //Esto es para verificar si el usuario ya le dio like a la imagen
                             if(isset($_SESSION['user_id'])){
@@ -97,7 +97,10 @@ $total_pages = ceil($total_imagenes / $limit);
                                 echo "<a href=./login.php><i class='fa-solid fa-thumbs-up'></i></a>
                                        <span>". $imagen['num_likes']." </span>";
                             }
-                            
+                            if($_SESSION['user_rol'] == 'admin')
+                            {
+                                echo "<a class='btn btn-outline-danger ms-3' href=./funciones/eliminarimagen.php?id_imagen=" .$imagen['id']."><i class='fa-solid fa-trash'></i></a>";
+                            }
                             ?>
                         </div>
                     </div>
