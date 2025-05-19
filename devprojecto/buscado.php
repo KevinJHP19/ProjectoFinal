@@ -37,13 +37,15 @@
         ORDER BY IMAGENES.id DESC 
         LIMIT $limit OFFSET $offset;");
     $imagenes = $imagenes->fetch_all(MYSQLI_ASSOC);
-    $etiquetas_relacionadas = $mysqli->query("SELECT DISTINCT ETIQUETA.nombre
+    $etiquetas_relacionadas = $mysqli->query("SELECT DISTINCT ETIQUETA.nombre, ETIQUETA.icono
                 FROM ETIQUETA
                 JOIN IMAGEN_ETIQUETA ON ETIQUETA.id = IMAGEN_ETIQUETA.etiqueta_id
                 JOIN IMAGENES ON IMAGENES.id = IMAGEN_ETIQUETA.imagen_id
                 WHERE ETIQUETA.nombre LIKE '%$itembusqueda%' OR IMAGENES.descripcion LIKE '%$itembusqueda%'
                 ");
     $etiquetas_relacionadas = $etiquetas_relacionadas->fetch_all(MYSQLI_ASSOC);
+
+    
 
 
     ?>
@@ -69,7 +71,18 @@
                 <div class="etiquetas d-flex gap-2 flex-wrap">
             
                     <?php foreach ($etiquetas_relacionadas as $etiqueta): ?>
-                        <a href="buscado.php?query=<?= $etiqueta['nombre'] ?>" class="btn btn-secondary btn-sm m-1" style="background-color: #141414; border-radius: 5px;"><?= $etiqueta['nombre'] ?></a>
+                        <?php 
+                                    // Convertir el código Unicode a un carácter legible
+                                    $icono = '';
+                                    if (!empty($etiqueta['icono'])) {
+                                        $unicode = str_replace('U+', '', $etiqueta['icono']); // Eliminar el prefijo "U+"
+                                        $icono = mb_convert_encoding('&#x' . $unicode . ';', 'UTF-8', 'HTML-ENTITIES');
+                                    }
+                                ?>
+                                <a 
+                        <a href="buscado.php?query=<?= htmlspecialchars($etiqueta['nombre']) ?>" class="btn btn-secondary btn-sm m-1" style="background-color: #141414; border-radius: 5px;">
+                            <?= $icono . " " . htmlspecialchars($etiqueta['nombre']) ?>
+                        </a>
                     <?php endforeach; ?>
                 
                 <div> 

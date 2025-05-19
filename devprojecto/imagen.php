@@ -41,6 +41,7 @@ $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
     <title>Vistaimagen</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/147cf78807.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
     
 
     <style>
@@ -52,15 +53,25 @@ $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
 .search-icon {
    left: 15px;
 }
-        #miraimagen .imagen{
-            padding: 30px 0 30px 0;
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: end;
-            justify-content: end;
-            height: 600px;
-        }
+        #miraimagen .imagen {
+    padding: 30px 0 30px 0;
+    background-size: cover; /* Ya lo tienes */
+    background-repeat: no-repeat;
+    background-position: center;
+    display: flex;
+    align-items: end;
+    justify-content: end;
+    height: 650px;
+    background-color: #232323;
+}
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 768px) {
+    #miraimagen .imagen {
+        height: 300px;
+        background-size: cover;
+        padding: 10px 0 10px 0;
+    }
+}
         h6, i{
             color: rgb(192, 190, 190);
         }
@@ -79,7 +90,14 @@ $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
         <section id="miraimagen" style="background-color: #232323;" class="pt-3">
             <div class="imagen container  rounded-3 mt-3" style="background-image: url(<?php echo $vistaimagen[0]['url'] ?>);">
                 <div class="descargar text-align-end">
-                    <a href="<?php echo $vistaimagen[0]['url'] ?>" download="img" class="btn btn-success m-1 me-4"><i class="fas fa-download" ></i> Descargar imagen</a>
+                    
+                    
+                    
+            <a href="./funciones/aumentardescarga.php?id_imagen=<?php echo $vistaimagen[0]['id']?>&page=true" class="btn btn-success m-1 me-4">
+                <i class="fas fa-download"></i> Descargar imagen
+            </a>
+                    
+                    
                 </div>
             </div>
             <div class="container">

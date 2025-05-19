@@ -111,8 +111,8 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
                                         <i class="fa-solid fa-gear m2 text-wring"></i> <!-- Ícono para admin -->
                                     <?php endif; ?></a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="./usuario/mismegusta.php">Mis me gusta</a></li>
-                                    <li><a class="dropdown-item" href="../usuario/perfil.php">Perfil</a></li>
+                                    <li><a class="dropdown-item" href="./mismegusta.php?user_id=<?php echo $_SESSION['user_id']?>">Mis me gusta</a></li>
+                                    <li><a class="dropdown-item" href="./perfil.php">Perfil</a></li>
                                     <li><a class="dropdown-item" href="../subirimagen.php">Subir imagenes</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="../logout.php">Cerrar sesion</a></li>
@@ -129,7 +129,7 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
                                     <li>Rol: <?php echo $user['rol'] ?><?php if ($user['rol'] === 'admin'): ?>
                                     <i class="fa-solid fa-shield-halved text-warning ms-2"></i> <!-- Ícono para admin -->
                                 <?php endif; ?> </li>
-                                    <li><a href="./mismegusta.php" class="mt-2 text-white nav-link">Mis me gusta</a></li>
+                                    <li><a href="./mismegusta.php?user_id=<?php echo $_SESSION['user_id']?>" class="mt-2 text-white nav-link">Mis me gusta</a></li>
                                     <li><a href="./perfil.php" class=" mt-32 text-white nav-link">Perfil</a></li>
                                     <li><a href="../subirimagen.php" class=" mt-2 text-white nav-link">Subir imagenes</a></li>
                                     <li><a href="../logout.php" class="mt-3 btn btn-primary ">Cerrar sesion</a></li>
