@@ -41,7 +41,11 @@ if ($_GET['page'] == true) {
     header("Location: ../buscado.php?query=".$_GET['query']);
     exit();
 
-} else {
+} else if($_GET['mismegusta'] == true){
+    header("Location: ../usuario/mismegusta.php?user_id=".$_SESSION['user_id']);
+    exit();
+
+}else {
     header("Location: ../index.php");
     exit();
 }
