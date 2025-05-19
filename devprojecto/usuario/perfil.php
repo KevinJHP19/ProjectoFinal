@@ -65,6 +65,7 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
         echo "<script>alert('Error al actualizar el perfil');</script>";
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,6 +76,7 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="../style.css">
     <script src="https://kit.fontawesome.com/147cf78807.js" crossorigin="anonymous"></script>
+    
 </head>
 <body>
 <header>
@@ -91,8 +93,10 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
 
                 <div class="collapse navbar-collapse w-100" id="navbarNav">
                     <div class="d-flex align-items-center justify-content-center w-50 mx-auto">
-                        <input type="search" class="form-control ps-2 bg-secondary mt-2 mb-2" placeholder="Buscar...">
-                        <button class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <form class="d-flex w-100" method="get" action="../buscado.php">
+                            <input type="search" name="query" class="form-control ps-2 bg-secondary mt-2 mb-2" placeholder="Buscar...">
+                            <button type="submit" class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
                     </div>
 
                     <div class="ms-auto">
@@ -107,7 +111,7 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
                                     <span class="ms-2 d-none d-lg-inline "><?php echo $user['nick'] ?></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="./admin/paneldegestion.php">Rol: <?php echo $user['rol'] ?> <?php if ($user['rol'] === 'admin'): ?>
+                                    <li><a class="dropdown-item" href="../admin/paneldegestion.php">Rol: <?php echo $user['rol'] ?> <?php if ($user['rol'] === 'admin'): ?>
                                         <i class="fa-solid fa-gear m2 text-wring"></i> <!-- Ícono para admin -->
                                     <?php endif; ?></a></li>
                                     <li><hr class="dropdown-divider"></li>
@@ -157,7 +161,7 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
                 </div>
                 <div>
                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editarPerfilModal">Editar perfil <i class="fa-solid fa-user-pen ms-2"></i></button>
-                    <a href="./misimagenes.php" class="btn btn-success">Mis imagenes <i class="fa-solid fa-images"></i></a>
+                    <a href="./misimagenes.php?user_id=<?php echo $_SESSION['user_id']?>" class="btn btn-success">Mis imagenes <i class="fa-solid fa-images"></i></a>
 
                     <?php if ($user['rol'] === 'admin'): ?>
                         <a class="btn btn-danger" href="../admin/paneldegestion.php">Panel de administración <i class="fa-solid fa-screwdriver-wrench ms-2"></i></a>
@@ -251,6 +255,7 @@ if (isset($_POST['nombre']) && isset($_POST['apellido']) && isset($_POST['usuari
         </div>
     </div>
 </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
 </body>

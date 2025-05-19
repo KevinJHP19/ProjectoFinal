@@ -65,8 +65,10 @@ $user = $userQuery->fetch_assoc();
 
                 <div class="collapse navbar-collapse w-100" id="navbarNav">
                     <div class="d-flex align-items-center justify-content-center w-50 mx-auto">
-                        <input type="search" class="form-control ps-2 bg-secondary mt-2 mb-2" placeholder="Buscar...">
-                        <button class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <form class="d-flex w-100" method="get" action="../buscado.php">
+                            <input type="search" name="query" class="form-control ps-2 bg-secondary mt-2 mb-2" placeholder="Buscar...">
+                            <button type="submit" class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </form>
                     </div>
 
                     <div class="ms-auto">
@@ -81,7 +83,7 @@ $user = $userQuery->fetch_assoc();
                                     <span class="ms-2 d-none d-lg-inline "><?php echo $user['nick'] ?></span>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
-                                    <li><a class="dropdown-item" href="./admin/paneldegestion.php">Rol: <?php echo $user['rol'] ?> <?php if ($user['rol'] === 'admin'): ?>
+                                    <li><a class="dropdown-item" href="../admin/paneldegestion.php">Rol: <?php echo $user['rol'] ?> <?php if ($user['rol'] === 'admin'): ?>
                                         <i class="fa-solid fa-gear m2 text-wring"></i> <!-- Ícono para admin -->
                                     <?php endif; ?></a></li>
                                     <li><hr class="dropdown-divider"></li>
@@ -149,6 +151,7 @@ $user = $userQuery->fetch_assoc();
             <?php endif; ?>
         </div>
     </main>
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
