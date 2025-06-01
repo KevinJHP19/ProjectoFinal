@@ -18,7 +18,8 @@ if (!$image) {
     exit("Imagen no encontrada.");
 }
 
-$imagePath = '../' . $image['url'];
+$imagePath = $_SERVER['DOCUMENT_ROOT'] . '/' . ltrim($image['url'], '/');
+
 
 if (file_exists($imagePath)) {
     $filename = basename($imagePath);

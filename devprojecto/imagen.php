@@ -93,9 +93,9 @@ $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
                     
                     
                     
-            <a href="../funciones/aumentardescarga.php?id_imagen=<?php echo $vistaimagen[0]['id']?>" class="btn btn-success m-1 me-4">
-                <i class="fas fa-download"></i> Descargar imagen
-            </a>
+            <button class="btn btn-success m-1 me-4" onclick="descargarImagen(<?= $vistaimagen[0]['id'] ?>)">
+    <i class="fas fa-download"></i> Descargar imagen
+</button>
                     
                     
                 </div>
@@ -113,9 +113,9 @@ $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
                         <div class="d-flex justify-content-end align-items-center gap-4">
                         <div class="d-flex fs-5 align-items-center">
                             <i class="fa-solid fa-download"></i>
-                            <span class="ms-2"><?php echo $vistaimagen[0]['num_descargas'] ?></span>
-                            
+                            <span id="contador-descargas" class="ms-2"><?php echo $vistaimagen[0]['num_descargas'] ?></span>
                         </div>
+
                         
 
                         
@@ -161,12 +161,25 @@ $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
-    <?php if (isset($_GET['descargar']) && $_GET['descargar'] == 1 && isset($_GET['id_imagen'])): ?>
 <script>
-    window.onload = function() {
-        window.location.href = "../funciones/descarga.php?id_imagen=<?= intval($_GET['id_imagen']) ?>";
-    }
+function descargarImagen(idImagen) {
+    fetch('/funciones/aumentardescarga.php?id_imagen=' + idImagen)
+        
+        .then(() => {
+            //  Actualiza el contador visible
+            const contador = document.getElementById('contador-descargas');
+            if (contador) {
+                contador.textContent = parseInt(contador.textContent) + 1;
+            }
+
+            // Inicia descarga real
+            window.location.href = '/funciones/descarga.php?id_imagen=' + idImagen;
+        })
+        
+}
 </script>
-<?php endif; ?>
+
+
+
 </body>
 </html>
