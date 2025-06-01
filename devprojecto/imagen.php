@@ -82,7 +82,7 @@ $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
             margin-right: 5px !important;
             margin-top: 10px !important;
         }
-</style>
+    </style>
 </head>
 <body>
     <?php include './header.php' ?>
@@ -93,7 +93,7 @@ $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
                     
                     
                     
-            <a href="./funciones/aumentardescarga.php?id_imagen=<?php echo $vistaimagen[0]['id']?>&page=true" class="btn btn-success m-1 me-4">
+            <a href="../funciones/aumentardescarga.php?id_imagen=<?php echo $vistaimagen[0]['id']?>" class="btn btn-success m-1 me-4">
                 <i class="fas fa-download"></i> Descargar imagen
             </a>
                     
@@ -146,7 +146,7 @@ $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
                                         $icono = mb_convert_encoding('&#x' . $unicode . ';', 'UTF-8', 'HTML-ENTITIES');
                                     }
                                 ?>
-                                <a href="#" class="text-decoration-none text-center rounded-3">
+                                <a href="buscado.php?query=<?php echo ($etiqueta['nombre']); ?>" class="text-decoration-none text-center rounded-3">
                                     <?php echo $icono . " " . $etiqueta['nombre']; ?>
                                 </a>
                             <?php endforeach; ?>
@@ -161,5 +161,12 @@ $verificarlike = $verificarlike->fetch_all(MYSQLI_ASSOC);
     </main>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     
+    <?php if (isset($_GET['descargar']) && $_GET['descargar'] == 1 && isset($_GET['id_imagen'])): ?>
+<script>
+    window.onload = function() {
+        window.location.href = "../funciones/descarga.php?id_imagen=<?= intval($_GET['id_imagen']) ?>";
+    }
+</script>
+<?php endif; ?>
 </body>
 </html>

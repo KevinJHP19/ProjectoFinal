@@ -64,12 +64,16 @@ $user = $userQuery->fetch_assoc();
                 </button>
 
                 <div class="collapse navbar-collapse w-100" id="navbarNav">
+                    <!-- Formulario de búsqueda -->
                     <div class="d-flex align-items-center justify-content-center w-50 mx-auto">
                         <form class="d-flex w-100" method="get" action="../buscado.php">
                             <input type="search" name="query" class="form-control ps-2 bg-secondary mt-2 mb-2" placeholder="Buscar...">
-                            <button type="submit" class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button type="submit" class="btn btn-primary p-2 ps-4 pe-4 mt-2 mb-2">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </button>
                         </form>
                     </div>
+                    <!-- Fin formulario de búsqueda -->
 
                     <div class="ms-auto">
                         <?php if (!isset($_SESSION['user_id'])): ?>
@@ -84,7 +88,7 @@ $user = $userQuery->fetch_assoc();
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li><a class="dropdown-item" href="../admin/paneldegestion.php">Rol: <?php echo $user['rol'] ?> <?php if ($user['rol'] === 'admin'): ?>
-                                        <i class="fa-solid fa-gear m2 text-wring"></i> <!-- Ícono para admin -->
+                                        <i class="fa-solid fa-gear m2 text-wring"></i>
                                     <?php endif; ?></a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><a class="dropdown-item" href="./mismegusta.php?user_id=<?php echo $_SESSION['user_id']?>">Mis me gusta</a></li>
@@ -94,7 +98,6 @@ $user = $userQuery->fetch_assoc();
                                     <li><a class="dropdown-item" href="../logout.php">Cerrar sesion</a></li>
                                 </ul>
                             </div>
-
                             <!-- Lista para pantallas pequeñas -->
                             <div class="d-block d-lg-none text-white">
                                 <div class="d-flex align-items-center mb-2">
@@ -103,7 +106,7 @@ $user = $userQuery->fetch_assoc();
                                 </div>
                                 <ul class="list-unstyled">
                                     <li>Rol: <?php echo $user['rol'] ?><?php if ($user['rol'] === 'admin'): ?>
-                                    <i class="fa-solid fa-shield-halved text-warning ms-2"></i> <!-- Ícono para admin -->
+                                    <i class="fa-solid fa-shield-halved text-warning ms-2"></i>
                                 <?php endif; ?> </li>
                                     <li><a href="./mismegusta.php?user_id=<?php echo $_SESSION['user_id']?>" class="mt-2 text-white nav-link">Mis me gusta</a></li>
                                     <li><a href="./perfil.php" class=" mt-32 text-white nav-link">Perfil</a></li>

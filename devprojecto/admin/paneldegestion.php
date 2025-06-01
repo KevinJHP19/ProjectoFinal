@@ -122,7 +122,7 @@ $usuarios = $mysqli->query("SELECT * FROM USUARIOS");
                                 </div>
                                 <div class="col-md-6">
                                     <label for="userUsername" class="form-label">Username:</label>
-                                    <input type="text" class="form-control" id="userUsername" name="username" required>
+                                    <input type="text" class="form-control" id="userUsername" name="usuario" required>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="userEmail" class="form-label">Correo Electrónico:</label>
@@ -179,8 +179,8 @@ $usuarios = $mysqli->query("SELECT * FROM USUARIOS");
                                 <td><?php echo $usuario['correo'] ?></td>
                                 <td><span class="badge bg-<?php echo ($usuario['rol'] === 'admin') ? 'danger' : 'primary'; ?>"><?php echo ucfirst($usuario['rol']) ?></span></td>
                                 <td>
-                                    <a href="editarusuario.php?id=<?php echo $usuario['id']?>" class="btn btn-warning btn-sm me-1"><i class="fa fa-edit"></i> Editar</a>
-                                    <a href="eliminarusuario.php?id=<?php echo $usuario['id']?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Eliminar</a>
+                                    <a href="./funciones/editarusuario.php?id=<?php echo $usuario['id']?>" class="btn btn-warning btn-sm me-1"><i class="fa fa-edit"></i> Editar</a>
+                                    <a href="./funciones/eliminarusuario.php?id=<?php echo $usuario['id']?>" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Eliminar</a>
                                 </td>
                             </tr>
                             <?php endforeach; ?>
