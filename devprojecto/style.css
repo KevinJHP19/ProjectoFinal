@@ -1,22 +1,26 @@
-.input-wrapper {
-    position: relative;
-    width: 271px;
-  }
+
+header .form-control{
+    border-radius: 10px 0 0 10px !important;
+    background-color: rgb(226, 226, 226) !important;
+}
+header button{
+    border-radius: 0 10px 10px 0 !important;
+    margin-left: -10px !important;
+    
+    
+}
+
+header .p-2{
+    padding-top: .4rem !important;
+    padding-bottom: .4rem !important;
+}
+.btn-secondary{
+            background-color: #232323 !important;
+            color: #fff !important;
+            padding:10px 35px 10px 35px !important;    
+        }
+        
   
-  .search-icon {
-     left: 15px;
-  }
-  #banner .input{
-      position: absolute;
-      left: 50%;
-      
-      
-  
-      
-      
-  
-  
-  }
           #banner{
               padding: 30px 0 30px 0;
               background-size: cover;
@@ -25,6 +29,16 @@
               align-items: center;
               justify-content: center;
           }
+          #banner .form-control {
+            border-radius: 10px 0 0 10px !important;
+            background-color: rgb(226, 226, 226) !important;
+          }
+          #banner button{
+    border-radius: 0 10px 10px 0 !important;
+    margin-left: -10px !important;
+    
+    
+}
           /* Estilos adicionales para la galería de imágenes */
           #images .col-md-4 {
               display: flex;
@@ -75,18 +89,5 @@
               list-style: none !important;
               
           }
-          #paginacion li a{
-              color: #fff;
-              text-decoration: none;
-  
-          }
-          #paginacion li{
-              padding: 10px;
-              border-radius: 5px;
-              
-          }
-          #paginacion li:hover{
-              background-color: #007bff;
-              color: #fff;
-          }
+          
   
